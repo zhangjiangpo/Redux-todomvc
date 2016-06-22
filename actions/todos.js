@@ -4,17 +4,10 @@
 import * as types from '../constants/ActionTypes'
 import ajaxApi from '../api'
 
-export function loadingStart(){
-    return {type:types.LOADING_START}
-}
-export function loadingEnd(){
-    return {type:types.LOADING_END}
-}
+
 export function addTodo(text,cb){
     return dispatch => {
-        dispatch(loadingStart());
-        ajaxApi.saveTodo(text).then((res) =>{
-            dispatch(loadingEnd());
+        ajaxApi.saveTodo(dispatch,text).then((res) =>{
             if(res){
                 dispatch({
                     type: types.ADD_TODO, text
